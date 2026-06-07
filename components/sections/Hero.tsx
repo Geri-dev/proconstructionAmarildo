@@ -76,7 +76,7 @@ export function Hero() {
       <Header />
 
       <div className="hero-mobile-shell relative z-10 mx-auto flex h-full min-h-0 w-full max-w-7xl flex-col px-4 sm:px-6 lg:justify-center lg:px-8 lg:pb-0 lg:pt-36 xl:pt-40">
-        <div className="flex min-h-0 flex-1 flex-col justify-center max-lg:pt-[4.75rem] lg:flex-none lg:justify-start lg:pt-0">
+        <div className="flex min-h-0 flex-1 flex-col justify-start max-lg:overflow-y-auto max-lg:pb-24 max-lg:pt-[8.25rem] sm:max-lg:pt-[8.75rem] lg:flex-none lg:overflow-visible lg:pb-0 lg:pt-0">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -119,13 +119,9 @@ export function Hero() {
           </motion.div>
         </motion.div>
         </div>
-
-        <div className="flex shrink-0 justify-center max-lg:pb-2 max-lg:pt-3 lg:hidden">
-          <HeroScrollHint />
-        </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 hidden justify-center pb-8 lg:flex">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center pb-6 sm:pb-8">
         <div className="pointer-events-auto">
           <HeroScrollHint />
         </div>
