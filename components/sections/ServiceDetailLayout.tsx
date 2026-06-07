@@ -1,0 +1,124 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import { ServicesPageHero } from "@/components/sections/ServicesPageHero";
+import { ServiceBookingFormAside } from "@/components/ui/ServiceBookingFormAside";
+import { ServiceBookingForm } from "@/components/ui/ServiceBookingForm";
+import { fontBody, fontDisplay } from "@/app/fonts";
+import { getServiceDetailContent } from "@/lib/service-content";
+import {
+  getServiceNameLower,
+  type ServiceItem,
+} from "@/lib/services";
+
+type ServiceDetailLayoutProps = {
+  service: ServiceItem;
+};
+
+export function ServiceDetailLayout({ service }: ServiceDetailLayoutProps) {
+  const content = getServiceDetailContent(service.slug);
+  const serviceName = getServiceNameLower(service.title);
+  const formColumnRef = useRef<HTMLDivElement>(null);
+  const processSectionRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <>
+      <ServicesPageHero
+        title={service.title}
+        description={service.description}
+        headingId="service-detail-heading"
+      />
+
+      <section
+        className="relative z-20 -mt-32 bg-transparent px-4 pb-16 sm:-mt-40 sm:px-6 sm:pb-20 lg:-mt-48 lg:px-8 lg:pb-24"
+        aria-labelledby="service-about-heading"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+            <div className="order-1 lg:col-span-7 xl:col-span-8">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-3xl">
+                <Image
+                  src={service.detailImage}
+                  alt={service.detailImageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                />
+              </div>
+            </div>
+
+            <div
+              ref={formColumnRef}
+              className="order-2 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 xl:col-span-4 xl:col-start-9"
+            >
+              <div className="hidden lg:block">
+                <ServiceBookingFormAside
+                  defaultServiceSlug={service.slug}
+                  formColumnRef={formColumnRef}
+                  processSectionRef={processSectionRef}
+                />
+              </div>
+              <div className="lg:hidden">
+                <ServiceBookingForm defaultServiceSlug={service.slug} />
+              </div>
+            </div>
+
+            <div className="order-3 rounded-2xl bg-white px-0 py-2 sm:rounded-3xl lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:px-0 lg:py-0 xl:col-span-8">
+              <div className="space-y-12 lg:mt-6">
+                <div>
+                  <h2
+                    id="service-about-heading"
+                    className={`${fontDisplay} text-3xl tracking-wide text-neutral-900 sm:text-4xl`}
+                  >
+                    About our {serviceName}
+                  </h2>
+                  <p
+                    className={`${fontBody} mt-4 text-base leading-relaxed text-neutral-600 sm:text-lg`}
+                  >
+                    {content.about}
+                  </p>
+                </div>
+
+                <div>
+                  <h2
+                    className={`${fontDisplay} text-3xl tracking-wide text-neutral-900 sm:text-4xl`}
+                  >
+                    Why choose our {serviceName}?
+                  </h2>
+                  <ul
+                    className={`${fontBody} mt-4 list-disc space-y-3 pl-5 text-base leading-relaxed text-neutral-600 sm:text-lg`}
+                  >
+                    {content.whyChoose.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div ref={processSectionRef}>
+                  <h2
+                    className={`${fontDisplay} text-3xl tracking-wide text-neutral-900 sm:text-4xl`}
+                  >
+                    Our installation process
+                  </h2>
+                  <ol
+                    className={`${fontBody} mt-4 space-y-4 text-base leading-relaxed text-neutral-600 sm:text-lg`}
+                  >
+                    {content.processSteps.map((step, index) => (
+                      <li key={step.title}>
+                        <span className="font-semibold text-neutral-900">
+                          {index + 1}. {step.title}:
+                        </span>{" "}
+                        {step.description}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
