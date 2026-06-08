@@ -7,7 +7,7 @@ export const SITE_TAGLINE = "Roofing & Construction in New Jersey";
 export const SITE_LOCALE = "en_US";
 
 export const DEFAULT_DESCRIPTION =
-  "Licensed & insured roofing and construction contractor in New Jersey. Roof installation, replacement, gutters, chimney, masonry, siding, and exterior work. Free estimates across Bergen County and statewide.";
+  "Licensed & insured roofing contractor in New Jersey. Roof installation, replacement, gutters, chimney, masonry, siding, and exterior work. Free estimates statewide.";
 
 export const DEFAULT_OG_IMAGE_PATH = "/images/logo-fix.png";
 
@@ -36,6 +36,7 @@ export const BUSINESS = {
     "Paterson",
     "Newark",
     "Jersey City",
+    "Edison",
     "Hackensack",
     "Paramus",
     "Fort Lee",

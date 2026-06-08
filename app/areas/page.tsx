@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ServicesPageHero } from "@/components/sections/ServicesPageHero";
-import { fontBody, fontDisplay } from "@/app/fonts";
-import { serviceAreas } from "@/lib/seo/areas";
+import { AreasCardsSection } from "@/components/sections/AreasCardsSection";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   getAreasItemListSchema,
@@ -46,36 +43,9 @@ export default function AreasIndexPage() {
         overlapLayout
       />
 
-      <section className="relative z-20 -mt-32 bg-transparent px-4 pb-16 sm:-mt-40 sm:px-6 sm:pb-20 lg:-mt-56 lg:px-8 lg:pb-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
-            {serviceAreas.map((area) => (
-              <article
-                key={area.slug}
-                className="flex h-full flex-col rounded-2xl border border-neutral-200 bg-[#FAFAFA] p-6 shadow-lg shadow-black/10 sm:rounded-3xl sm:p-8"
-              >
-                <h2
-                  className={`${fontDisplay} text-2xl tracking-wide text-neutral-900`}
-                >
-                  {area.name}
-                </h2>
-                <p
-                  className={`${fontBody} mt-4 flex-1 text-sm leading-relaxed text-neutral-600 sm:text-base`}
-                >
-                  {area.description}
-                </p>
-                <Link
-                  href={`/areas/${area.slug}`}
-                  className={`${fontBody} mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-orange transition-opacity hover:opacity-80`}
-                >
-                  View area
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="relative z-20 -mt-32 sm:-mt-40 lg:-mt-56">
+        <AreasCardsSection showHeader={false} className="pb-16 sm:pb-20 lg:pb-24" />
+      </div>
     </main>
   );
 }

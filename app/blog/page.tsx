@@ -2,23 +2,19 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BlogIndexSection } from "@/components/sections/BlogIndexSection";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { SEO_KEYWORDS } from "@/lib/seo/keywords";
+import { getBlogIndexSeo, getPageKeywords } from "@/lib/seo/keywords";
 import {
   getBlogIndexSchema,
   getBreadcrumbSchema,
 } from "@/lib/seo/schema";
 
+const seo = getBlogIndexSeo();
+
 export const metadata: Metadata = createPageMetadata({
-  title: "Roofing Tips & Guides for New Jersey Homeowners",
-  description:
-    "Read expert guides on roof replacement timelines, costs, insurance claims, materials, and maintenance for New Jersey homeowners from Creative Pro Construction.",
-  path: "/blog",
-  keywords: [
-    ...SEO_KEYWORDS.longTail,
-    ...SEO_KEYWORDS.intent.informational,
-    "NJ roofing blog",
-    "roofing advice New Jersey",
-  ],
+  title: seo.title,
+  description: seo.description,
+  path: seo.path,
+  keywords: getPageKeywords(seo),
 });
 
 export default function BlogPage() {

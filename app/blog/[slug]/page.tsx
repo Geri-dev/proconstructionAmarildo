@@ -4,9 +4,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BlogPostContent } from "@/components/sections/BlogPostContent";
 import {
   getAllBlogSlugs,
-  getBlogKeywords,
   getBlogPostBySlug,
 } from "@/lib/blog/posts";
+import { getBlogKeywords, getFeaturedBlogSeo } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   getBlogPostSchema,
@@ -35,9 +35,11 @@ export async function generateMetadata({
     });
   }
 
+  const seo = getFeaturedBlogSeo(slug);
+
   return createPageMetadata({
-    title: post.title,
-    description: post.excerpt,
+    title: seo?.title ?? post.title,
+    description: seo?.description ?? post.excerpt,
     path: `/blog/${slug}`,
     keywords: getBlogKeywords(slug),
   });

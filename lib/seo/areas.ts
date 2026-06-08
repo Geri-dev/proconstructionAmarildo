@@ -237,9 +237,10 @@ export const serviceAreas: ServiceArea[] = [
       "Essex County scheduling and support",
     ],
     keywords: [
-      "roofer Newark NJ",
-      "roof replacement Newark New Jersey",
-      "Newark roofing contractor",
+      "roofing contractor newark nj",
+      "roof repair newark new jersey",
+      "newark roofing company",
+      "emergency roofer newark nj",
     ],
     nearby: ["East Orange", "Bloomfield", "Irvington", "Bayonne"],
   },
@@ -258,11 +259,34 @@ export const serviceAreas: ServiceArea[] = [
       "Insurance claim support when applicable",
     ],
     keywords: [
-      "roofer Jersey City NJ",
-      "roof replacement Jersey City",
-      "Jersey City roofing company",
+      "roofing company jersey city nj",
+      "roof installation jersey city",
+      "jersey city roof repair",
+      "hudson county roofing contractor",
     ],
     nearby: ["Hoboken", "Bayonne", "Newark", "Union City"],
+  },
+  {
+    slug: "edison-nj",
+    name: "Edison, NJ",
+    headline: "ROOF REPLACEMENT & ROOFING IN EDISON, NJ",
+    description:
+      "Roof replacement and installation in Edison, NJ — Middlesex County specialists for tear-offs, storm damage, gutters, and full exterior services. Free estimates.",
+    intro:
+      "Edison's suburban neighborhoods and mixed housing stock need roofing systems built for Central New Jersey rainfall, tree cover, and seasonal weather swings. Creative Pro Construction provides thorough inspections, competitive estimates, and durable installations across Edison and Middlesex County.",
+    highlights: [
+      "Edison roof replacement and new installation",
+      "Middlesex County scheduling with fast response",
+      "Storm damage inspections and insurance documentation",
+      "Gutters, chimney, masonry, and siding services",
+    ],
+    keywords: [
+      "roof replacement edison nj",
+      "roofing contractor edison nj",
+      "edison nj roof repair",
+      "middlesex county roofing",
+    ],
+    nearby: ["Woodbridge", "Piscataway", "New Brunswick", "Metuchen"],
   },
   {
     slug: "paramus-nj",
@@ -328,6 +352,38 @@ export const serviceAreas: ServiceArea[] = [
     nearby: ["Paterson", "Clifton", "Totowa", "Pompton Lakes"],
   },
 ];
+
+/** Nav order: major NJ cities by population & prominence, then counties by population. */
+const NAV_AREA_ORDER = [
+  "newark-nj",
+  "jersey-city-nj",
+  "paterson-nj",
+  "edison-nj",
+  "clifton-nj",
+  "hackensack-nj",
+  "wayne-nj",
+  "paramus-nj",
+  "fort-lee-nj",
+  "bergen-county",
+  "middlesex-county",
+  "essex-county",
+  "hudson-county",
+  "passaic-county",
+  "union-county",
+  "morris-county",
+] as const;
+
+export function getNavServiceAreas(): ServiceArea[] {
+  const order = new Map(
+    NAV_AREA_ORDER.map((slug, index) => [slug, index]),
+  );
+
+  return [...serviceAreas].sort((a, b) => {
+    const aIndex = order.get(a.slug) ?? Number.MAX_SAFE_INTEGER;
+    const bIndex = order.get(b.slug) ?? Number.MAX_SAFE_INTEGER;
+    return aIndex - bIndex;
+  });
+}
 
 export function getAreaBySlug(slug: string): ServiceArea | undefined {
   return serviceAreas.find((area) => area.slug === slug);

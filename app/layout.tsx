@@ -17,8 +17,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${bebasNeue.variable} ${geist.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className={`${fontBody} min-h-full flex flex-col`}>
+      <body
+        className={`${fontBody} min-h-full flex flex-col`}
+        suppressHydrationWarning
+      >
         <GlobalStructuredData />
         <BookingModalProvider>
           {children}

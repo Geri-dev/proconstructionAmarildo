@@ -15,9 +15,9 @@ const LOGO_SRC = "/images/logo-fix.png";
 
 const pageLinks = [
   { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
+  { href: "/about-us", label: "About" },
   { href: "/services", label: "Services", highlight: true },
-  { href: "/#roof-repair-before-after", label: "Projects" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/services", label: "All Services" },
 ];
 
@@ -26,12 +26,12 @@ const resourceLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/areas", label: "Service Areas" },
   { href: "/#contact", label: "Contact" },
-  { href: "/#reviews", label: "Reviews" },
-  { href: "/#reviews", label: "Testimonials" },
+  { href: "/reviews", label: "Reviews" },
+  { href: "/reviews", label: "Testimonials" },
 ];
 
 const companyLinks = [
-  { href: "/#about", label: "Our Story" },
+  { href: "/about-us", label: "Our Story" },
   { href: "/#process", label: "Our Process" },
   { href: "/#brands", label: "Materials" },
   { href: "/#specialized-services", label: "Specialties" },
@@ -106,9 +106,9 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Main dark footer */}
+      {/* Main dark footer — extends to page bottom */}
       <div className="footer-dark-panel relative -mt-14 pt-28 sm:-mt-16 sm:pt-32 lg:-mt-20 lg:pt-36">
-        <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
             {/* Brand column */}
             <div className="sm:col-span-2 lg:col-span-4">
@@ -189,10 +189,10 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom attribution tab */}
-        <div className="footer-attribution-tab pointer-events-none absolute inset-x-0 bottom-0 flex justify-center">
+        {/* Copyright — white tab on dark background, flush to bottom */}
+        <div className="flex justify-center">
           <p
-            className={`${fontBody} rounded-t-2xl bg-white px-8 py-3.5 text-center text-xs text-neutral-600 sm:text-sm`}
+            className={`${fontBody} rounded-t-2xl bg-white px-8 py-3.5 text-center text-xs text-neutral-600 sm:px-10 sm:text-sm`}
           >
             © {year}{" "}
             <span className="font-semibold text-brand-accent">
@@ -202,9 +202,6 @@ export function Footer() {
           </p>
         </div>
       </div>
-
-      {/* Spacer for attribution tab */}
-      <div className="h-10 bg-white sm:h-12" aria-hidden />
     </footer>
   );
 }

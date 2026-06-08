@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import { ServicesPageHero } from "@/components/sections/ServicesPageHero";
-import { ServiceBookingFormAside } from "@/components/ui/ServiceBookingFormAside";
 import { ServiceBookingForm } from "@/components/ui/ServiceBookingForm";
 import { fontBody, fontDisplay } from "@/app/fonts";
 import { getServiceDetailContent } from "@/lib/service-content";
@@ -19,8 +17,6 @@ type ServiceDetailLayoutProps = {
 export function ServiceDetailLayout({ service }: ServiceDetailLayoutProps) {
   const content = getServiceDetailContent(service.slug);
   const serviceName = getServiceNameLower(service.title);
-  const formColumnRef = useRef<HTMLDivElement>(null);
-  const processSectionRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -48,16 +44,9 @@ export function ServiceDetailLayout({ service }: ServiceDetailLayoutProps) {
               </div>
             </div>
 
-            <div
-              ref={formColumnRef}
-              className="order-2 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 xl:col-span-4 xl:col-start-9"
-            >
-              <div className="hidden lg:block">
-                <ServiceBookingFormAside
-                  defaultServiceSlug={service.slug}
-                  formColumnRef={formColumnRef}
-                  processSectionRef={processSectionRef}
-                />
+            <div className="order-2 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 xl:col-span-4 xl:col-start-9">
+              <div className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
+                <ServiceBookingForm defaultServiceSlug={service.slug} />
               </div>
               <div className="lg:hidden">
                 <ServiceBookingForm defaultServiceSlug={service.slug} />
@@ -95,7 +84,7 @@ export function ServiceDetailLayout({ service }: ServiceDetailLayoutProps) {
                   </ul>
                 </div>
 
-                <div ref={processSectionRef}>
+                <div>
                   <h2
                     className={`${fontDisplay} text-3xl tracking-wide text-neutral-900 sm:text-4xl`}
                   >

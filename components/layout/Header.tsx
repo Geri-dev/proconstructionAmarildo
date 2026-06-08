@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,15 +8,20 @@ import { Menu, X } from "lucide-react";
 import { fontBody } from "@/app/fonts";
 import { ConsultationButton } from "@/components/ui/ConsultationButton";
 import { ServicesNavDropdown } from "@/components/layout/ServicesNavDropdown";
+import { AreasNavDropdown } from "@/components/layout/AreasNavDropdown";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
 const LOGO_SRC = "/images/logo-fix.png";
 
-const navLinks = [
+const navLinksBeforeServices = [
   { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
+  { href: "/about-us", label: "About" },
   { href: "/blog", label: "Blog" },
-  { href: "/#reviews", label: "Reviews" },
+];
+
+const navLinksAfterServices = [
+  { href: "/gallery", label: "Gallery" },
+  { href: "/reviews", label: "Reviews" },
 ];
 
 type HeaderTheme = "dark" | "light";
@@ -31,6 +36,17 @@ export function Header({ theme = "dark", position = "absolute" }: HeaderProps) {
   const reducedMotion = usePrefersReducedMotion();
   const isLight = theme === "light";
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
+
   const linkClass = isLight
     ? "text-neutral-800 hover:text-brand-orange"
     : "text-white/90 hover:text-brand-orange";
@@ -43,7 +59,7 @@ export function Header({ theme = "dark", position = "absolute" }: HeaderProps) {
 
   const desktopNavItems = (
     <>
-      {navLinks.slice(0, 3).map((link) => (
+      {navLinksBeforeServices.map((link) => (
         <li key={link.href}>
           <Link
             href={link.href}
@@ -54,7 +70,8 @@ export function Header({ theme = "dark", position = "absolute" }: HeaderProps) {
         </li>
       ))}
       <ServicesNavDropdown theme={theme} />
-      {navLinks.slice(3).map((link) => (
+      <AreasNavDropdown theme={theme} />
+      {navLinksAfterServices.map((link) => (
         <li key={link.href}>
           <Link
             href={link.href}
@@ -97,7 +114,7 @@ export function Header({ theme = "dark", position = "absolute" }: HeaderProps) {
           className="absolute left-1/2 hidden -translate-x-1/2 lg:block"
           aria-label="Main navigation"
         >
-          <ul className="flex items-center gap-10">{desktopNavItems}</ul>
+          <ul className="flex items-center gap-6 xl:gap-10">{desktopNavItems}</ul>
         </nav>
 
         <div className="hidden shrink-0 lg:block">
@@ -122,27 +139,22 @@ export function Header({ theme = "dark", position = "absolute" }: HeaderProps) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={
-              reducedMotion
-                ? { opacity: 0 }
-                : { opacity: 0, height: 0 }
-            }
-            animate={{ opacity: 1, height: "auto" }}
-            exit={
-              reducedMotion
-                ? { opacity: 0 }
-                : { opacity: 0, height: 0 }
-            }
-            transition={{ duration: 0.3 }}
-            className={`overflow-hidden border-t backdrop-blur-md lg:hidden ${mobilePanelClass}`}
+            initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className={`fixed inset-x-0 top-[3.5rem] bottom-0 z-[60] overflow-y-auto overscroll-contain border-t backdrop-blur-md sm:top-[4.25rem] lg:hidden ${mobilePanelClass}`}
           >
-            <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Mobile navigation">
-              {navLinks.slice(0, 3).map((link) => (
+            <nav
+              className="flex min-h-full flex-col gap-1 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
+              aria-label="Mobile navigation"
+            >
+              {navLinksBeforeServices.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`${fontBody} rounded-lg px-3 py-3 text-base transition-colors hover:text-brand-orange ${isLight ? "hover:bg-neutral-100" : "hover:bg-white/10"} ${linkClass}`}
+                  className={`${fontBody} rounded-lg px-3 py-3.5 text-lg transition-colors hover:text-brand-orange ${isLight ? "hover:bg-neutral-100" : "hover:bg-white/10"} ${linkClass}`}
                 >
                   {link.label}
                 </Link>
@@ -152,12 +164,17 @@ export function Header({ theme = "dark", position = "absolute" }: HeaderProps) {
                 layout="mobile"
                 onNavigate={() => setMobileOpen(false)}
               />
-              {navLinks.slice(3).map((link) => (
+              <AreasNavDropdown
+                theme={theme}
+                layout="mobile"
+                onNavigate={() => setMobileOpen(false)}
+              />
+              {navLinksAfterServices.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`${fontBody} rounded-lg px-3 py-3 text-base transition-colors hover:text-brand-orange ${isLight ? "hover:bg-neutral-100" : "hover:bg-white/10"} ${linkClass}`}
+                  className={`${fontBody} rounded-lg px-3 py-3.5 text-lg transition-colors hover:text-brand-orange ${isLight ? "hover:bg-neutral-100" : "hover:bg-white/10"} ${linkClass}`}
                 >
                   {link.label}
                 </Link>

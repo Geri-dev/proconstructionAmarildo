@@ -56,16 +56,17 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "roof-replacement-cost-new-jersey",
-    title: "Roof Replacement Cost in New Jersey (2025 Guide)",
+    slug: "roof-replacement-cost-nj",
+    title: "Roof Replacement Cost NJ (2026 Guide)",
     excerpt:
       "Roof replacement in NJ typically ranges from $8,000 to $25,000+ depending on size, materials, and repairs. See what drives pricing and how to compare estimates.",
     publishedAt: "2025-05-22",
     readTime: "7 min read",
     keywords: [
-      "roof replacement cost New Jersey",
-      "NJ roof replacement price",
-      "how much does a new roof cost in NJ",
+      "roof replacement cost nj",
+      "average cost to replace roof in new jersey",
+      "nj roof replacement price per square",
+      "asphalt shingle roof cost nj 2026",
     ],
     sections: [
       {
@@ -97,16 +98,59 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "insurance-claim-roof-repair-new-jersey",
-    title: "Insurance Claims for Roof Repair in New Jersey",
+    slug: "storm-damage-roof-repair-nj",
+    title: "Storm Damage Roof Repair NJ",
     excerpt:
-      "Storm or hail damage? Learn how NJ homeowners document roof damage, work with adjusters, and restore their roof with a licensed contractor.",
+      "Nor'easters, hail, and high winds damage New Jersey roofs every season. Learn how to spot storm damage, document it, and schedule professional repair before leaks spread.",
+    publishedAt: "2025-05-28",
+    readTime: "6 min read",
+    keywords: [
+      "storm damage roof repair nj",
+      "nor'easter roof damage new jersey",
+      "hail damage roof nj",
+      "wind damage roof repair nj",
+    ],
+    sections: [
+      {
+        heading: "Common storm damage in New Jersey",
+        paragraphs: [
+          "New Jersey sits in the path of nor'easters, summer thunderstorms, and occasional hail events that can strip granules, lift shingles, and compromise flashing. After any major storm, inspect your roof from the ground for missing tabs, dented vents, or debris impact marks.",
+          "Creative Pro Construction provides free storm damage inspections across Clifton, Bergen County, Essex County, and statewide. Early detection prevents small exterior damage from becoming interior water damage.",
+        ],
+      },
+      {
+        heading: "Signs your roof needs storm repair",
+        paragraphs: ["Schedule a professional inspection if you notice:"],
+        list: [
+          "Missing, cracked, or curling shingles after high winds",
+          "Granule buildup in gutters or downspouts",
+          "Dented or displaced flashing around chimneys and walls",
+          "Water stains on ceilings or attic moisture",
+          "Fallen tree limbs or debris on the roof surface",
+          "Hail impact marks on shingles or metal vents",
+        ],
+      },
+      {
+        heading: "Next steps after storm damage",
+        paragraphs: [
+          "Document damage with photos, schedule a licensed contractor inspection, and contact your insurance carrier if repairs may exceed your deductible. We help homeowners in New Jersey understand repair scope, meet adjusters on-site, and restore roofs quickly before the next storm season.",
+          "Suspect storm damage? Book a free inspection with Creative Pro Construction today.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "roof-insurance-claim-nj",
+    title: "Roof Insurance Claim New Jersey",
+    excerpt:
+      "Step-by-step guide for NJ homeowners filing a roof insurance claim — documentation, adjuster visits, and working with a licensed roofing contractor.",
     publishedAt: "2025-06-01",
     readTime: "6 min read",
     keywords: [
-      "insurance claim roof repair New Jersey",
-      "storm damage roof NJ",
-      "hail damage roof insurance NJ",
+      "roof insurance claim new jersey",
+      "filing homeowners insurance roof claim nj",
+      "storm damage insurance roof nj",
+      "roof damage documentation nj",
     ],
     sections: [
       {

@@ -29,6 +29,11 @@ function getSlugFromPathname(pathname: string): string | undefined {
   return match?.[1];
 }
 
+function getAreaSlugFromPathname(pathname: string): string | undefined {
+  const match = pathname.match(/^\/areas\/([^/]+)/);
+  return match?.[1];
+}
+
 export function BookingModalProvider({
   children,
 }: {
@@ -40,11 +45,14 @@ export function BookingModalProvider({
   const [serviceSlug, setServiceSlug] = useState(
     specializedServices[0]?.slug ?? "roof-installation",
   );
+  const [areaSlug, setAreaSlug] = useState<string | undefined>();
 
   const openBookingModal = useCallback(
     (slug?: string) => {
       const fromPath = getSlugFromPathname(pathname);
+      const fromAreaPath = getAreaSlugFromPathname(pathname);
       setServiceSlug(slug ?? fromPath ?? specializedServices[0]?.slug ?? "");
+      setAreaSlug(fromAreaPath);
       setIsOpen(true);
     },
     [pathname],
@@ -101,7 +109,7 @@ export function BookingModalProvider({
               role="dialog"
               aria-modal="true"
               aria-labelledby="booking-modal-title"
-              className="relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl"
+              className="relative z-10 flex min-h-[92dvh] max-h-[96dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:min-h-0 sm:max-h-[92vh] sm:rounded-3xl"
               initial={
                 reducedMotion
                   ? { opacity: 0 }
@@ -124,10 +132,11 @@ export function BookingModalProvider({
                 <X className="h-5 w-5" />
               </button>
 
-              <div className="p-4 sm:p-6">
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] [-webkit-overflow-scrolling:touch] sm:p-6">
                 <ServiceBookingForm
-                  key={serviceSlug}
+                  key={`${serviceSlug}-${areaSlug ?? "default"}`}
                   defaultServiceSlug={serviceSlug}
+                  defaultAreaSlug={areaSlug}
                   idPrefix="modal"
                   embedded
                 />

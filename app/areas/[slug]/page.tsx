@@ -5,8 +5,8 @@ import { AreaPageContent } from "@/components/sections/AreaPageContent";
 import {
   getAllAreaSlugs,
   getAreaBySlug,
-  getAreaKeywords,
 } from "@/lib/seo/areas";
+import { getAreaKeywords, getFeaturedAreaPageSeo } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   getAreaServiceSchema,
@@ -35,9 +35,11 @@ export async function generateMetadata({
     });
   }
 
+  const seo = getFeaturedAreaPageSeo(slug);
+
   return createPageMetadata({
-    title: `Roofing Contractor in ${area.name}`,
-    description: area.description,
+    title: seo?.title ?? `Roofing Contractor in ${area.name}`,
+    description: seo?.description ?? area.description,
     path: `/areas/${slug}`,
     keywords: getAreaKeywords(slug),
   });

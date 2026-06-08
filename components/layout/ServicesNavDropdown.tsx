@@ -68,24 +68,26 @@ export function ServicesNavDropdown({
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
-          className={`${fontBody} flex w-full items-center justify-between rounded-lg px-3 py-3 text-base transition-colors ${triggerClass} ${isLight ? "hover:bg-neutral-100" : "hover:bg-white/10"}`}
+          className={`${fontBody} flex w-full items-center justify-between rounded-lg px-3 py-3.5 text-lg transition-colors ${triggerClass} ${isLight ? "hover:bg-neutral-100" : "hover:bg-white/10"}`}
           aria-expanded={open}
         >
           Services
           <ChevronDown
-            className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+            className={`h-5 w-5 transition-transform ${open ? "rotate-180" : ""}`}
             aria-hidden
           />
         </button>
 
         {open && (
-          <ul className={`${fontBody} mt-1 flex flex-col gap-0.5 border-t pt-2 ${isLight ? "border-neutral-200" : "border-white/10"}`}>
+          <ul
+            className={`${fontBody} mt-1 flex flex-col gap-0.5 border-t pt-2 ${isLight ? "border-neutral-200" : "border-white/10"}`}
+          >
             {specializedServices.map((service) => (
               <li key={service.slug}>
                 <Link
                   href={`/services/${service.slug}`}
                   onClick={closeMenu}
-                  className={`block rounded-lg px-3 py-2.5 text-sm transition-colors ${itemClass}`}
+                  className={`block rounded-lg px-3 py-3 text-base transition-colors ${itemClass}`}
                 >
                   {formatServiceTitle(service.title)}
                 </Link>
@@ -95,7 +97,7 @@ export function ServicesNavDropdown({
               <Link
                 href="/services"
                 onClick={closeMenu}
-                className={`${fontBody} inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border text-sm font-semibold transition-colors ${seeAllClass}`}
+                className={`${fontBody} inline-flex min-h-[48px] w-full items-center justify-center rounded-lg border text-base font-semibold transition-colors ${seeAllClass}`}
               >
                 See all
               </Link>
@@ -127,7 +129,7 @@ export function ServicesNavDropdown({
           className={`absolute left-1/2 top-[calc(100%+0.75rem)] z-50 w-[min(20rem,calc(100vw-2rem))] -translate-x-1/2 overflow-hidden rounded-2xl border ${panelClass}`}
           role="menu"
         >
-          <ul className="max-h-[min(24rem,calc(100vh-8rem))] overflow-y-auto py-2">
+          <ul className="max-h-[min(36rem,calc(100dvh-7rem))] overflow-y-auto overscroll-contain py-2">
             {specializedServices.map((service) => (
               <li key={service.slug} role="none">
                 <Link

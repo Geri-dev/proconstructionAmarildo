@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ServiceDetailLayout } from "@/components/sections/ServiceDetailLayout";
 import { ServiceOtherServicesSection } from "@/components/sections/ServiceOtherServicesSection";
-import { getKeywordsForService } from "@/lib/seo/keywords";
+import { AreasCardsSection } from "@/components/sections/AreasCardsSection";
+import { getKeywordsForService, getServicePageSeo } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   getBreadcrumbSchema,
@@ -39,10 +40,11 @@ export async function generateMetadata({
   }
 
   const title = formatServiceTitle(service.title);
+  const seo = getServicePageSeo(slug);
 
   return createPageMetadata({
-    title: `${title} in New Jersey`,
-    description: `${service.description} Licensed & insured. Free estimates from Creative Pro Construction serving NJ and Bergen County.`,
+    title: seo?.title ?? `${title} in New Jersey`,
+    description: seo?.description ?? `${service.description} Licensed & insured. Free estimates from Creative Pro Construction serving NJ.`,
     path: `/services/${slug}`,
     keywords: getKeywordsForService(slug),
   });
@@ -72,6 +74,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         ]}
       />
       <ServiceDetailLayout service={service} />
+      <AreasCardsSection limit={6} showExploreAll />
       <ServiceOtherServicesSection currentSlug={service.slug} />
     </main>
   );

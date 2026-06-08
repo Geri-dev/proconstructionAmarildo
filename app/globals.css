@@ -139,6 +139,18 @@
   }
 }
 
+#specialized-services .service-card,
+#other-services .service-card {
+  transform: none;
+  transition: none;
+}
+
+#specialized-services .service-card:hover,
+#other-services .service-card:hover {
+  transform: none;
+  z-index: auto;
+}
+
 .service-card::before {
   content: "";
   position: absolute;
@@ -246,8 +258,4 @@
   .footer-dark-panel {
     border-radius: 3rem 3rem 0 0;
   }
-}
-
-.footer-attribution-tab {
-  transform: translateY(50%);
 }

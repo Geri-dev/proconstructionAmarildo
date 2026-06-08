@@ -103,11 +103,17 @@ function ReviewCard({ review }: { review: Review }) {
 
 export function ReviewsSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const pointerStartX = useRef(0);
+  const dragOffsetRef = useRef(0);
+  const isDraggingRef = useRef(false);
   const inView = useInView(ref, { once: true, amount: 0.1 });
   const reducedMotion = usePrefersReducedMotion();
   const slidesPerView = useSlidesPerView();
   const maxIndex = Math.max(0, reviews.length - slidesPerView);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     setActiveIndex((current) => Math.min(current, maxIndex));
@@ -116,6 +122,68 @@ export function ReviewsSection() {
   const goToSlide = useCallback((index: number) => {
     setActiveIndex(index);
   }, []);
+
+  const finishDrag = useCallback(() => {
+    if (!isDraggingRef.current) return;
+
+    const width = carouselRef.current?.offsetWidth ?? 0;
+    const stepWidth = width / slidesPerView;
+    const threshold = Math.min(stepWidth * 0.18, 80);
+    const offset = dragOffsetRef.current;
+
+    setActiveIndex((current) => {
+      if (offset < -threshold) return Math.min(maxIndex, current + 1);
+      if (offset > threshold) return Math.max(0, current - 1);
+      return current;
+    });
+
+    isDraggingRef.current = false;
+    setIsDragging(false);
+    dragOffsetRef.current = 0;
+    setDragOffset(0);
+  }, [maxIndex, slidesPerView]);
+
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+
+      isDraggingRef.current = true;
+      setIsDragging(true);
+      pointerStartX.current = event.clientX;
+      dragOffsetRef.current = 0;
+      setDragOffset(0);
+      event.currentTarget.setPointerCapture(event.pointerId);
+    },
+    [],
+  );
+
+  const handlePointerMove = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (!isDraggingRef.current) return;
+
+      let delta = event.clientX - pointerStartX.current;
+      const atStart = activeIndex === 0;
+      const atEnd = activeIndex === maxIndex;
+
+      if ((atStart && delta > 0) || (atEnd && delta < 0)) {
+        delta *= 0.3;
+      }
+
+      dragOffsetRef.current = delta;
+      setDragOffset(delta);
+    },
+    [activeIndex, maxIndex],
+  );
+
+  const handlePointerUp = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+      finishDrag();
+    },
+    [finishDrag],
+  );
 
   return (
     <section
@@ -161,11 +229,22 @@ export function ReviewsSection() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.55, delay: 0.08 }}
         >
-          <div className="overflow-hidden">
+          <div
+            ref={carouselRef}
+            className="touch-pan-y overflow-hidden select-none cursor-grab active:cursor-grabbing"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+          >
             <div
-              className="flex transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+              className={`flex ${
+                isDragging
+                  ? "transition-none"
+                  : "transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+              }`}
               style={{
-                transform: `translateX(-${(activeIndex * 100) / slidesPerView}%)`,
+                transform: `translateX(calc(-${(activeIndex * 100) / slidesPerView}% + ${dragOffset}px))`,
               }}
             >
               {reviews.map((review) => (
