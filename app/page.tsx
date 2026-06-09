@@ -31,12 +31,12 @@ export default function Home() {
       <StatsSection />
       <WhyChooseSection />
       <RaisingStandardSection />
+      <ExcellenceWorkSection />
       <ServiceAreaSection />
       <WorkingProcessSection />
       <SpecializedServicesSection />
       <RoofRepairBeforeAfterSection />
       <BrandsCarouselSection />
-      <ExcellenceWorkSection />
       <ReviewsSection />
     </main>
   );
