@@ -80,7 +80,7 @@ const GALLERY_IMAGE_ORDER = [
   "masonry8-gallery.webp",
 ] as const;
 
-const GALLERY_ORDER_INDEX = new Map(
+const GALLERY_ORDER_INDEX = new Map<string, number>(
   GALLERY_IMAGE_ORDER.map((filename, index) => [filename, index]),
 );
 
