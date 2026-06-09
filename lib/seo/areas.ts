@@ -374,7 +374,7 @@ const NAV_AREA_ORDER = [
 ] as const;
 
 export function getNavServiceAreas(): ServiceArea[] {
-  const order = new Map(
+  const order = new Map<string, number>(
     NAV_AREA_ORDER.map((slug, index) => [slug, index]),
   );
 
