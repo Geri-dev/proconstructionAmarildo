@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "Roofing Service Areas in New Jersey",
   description:
-    "Creative Pro Construction serves Clifton, Bergen, Passaic, Essex, Morris, Hudson, Union, Middlesex counties, Paterson, Wayne, Newark, Jersey City, Hackensack, Paramus, Fort Lee, and all of New Jersey.",
+    "Creative Pro Construction serves all 21 New Jersey counties — Bergen, Essex, Hudson, Middlesex, Passaic, Morris, Union, Ocean, Monmouth, and statewide. Find your county and city for local roofing services.",
   path: "/areas",
   keywords: [
     "roofing service areas New Jersey",
@@ -38,7 +38,7 @@ export default function AreasIndexPage() {
       <ServicesPageHero
         eyebrow="Service areas"
         title="WHERE WE SERVE IN NEW JERSEY"
-        description="Local roofing and construction services across North and Central New Jersey. Select your area to learn more."
+        description="Local roofing and construction services across all 21 New Jersey counties. Select your county to explore cities we serve."
         headingId="areas-index-heading"
         overlapLayout
       />

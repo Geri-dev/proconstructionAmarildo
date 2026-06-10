@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { LEGACY_AREA_REDIRECTS } from "./lib/seo/legacy-redirects";
 import { getSeoRedirects } from "./lib/seo/page-map";
 
 const nextConfig: NextConfig = {
@@ -10,6 +11,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       ...getSeoRedirects().map(({ source, destination }) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
+      ...LEGACY_AREA_REDIRECTS.map(({ source, destination }) => ({
         source,
         destination,
         permanent: true,

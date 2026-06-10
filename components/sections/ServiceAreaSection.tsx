@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion";
 import { fontBody, fontDisplay } from "@/app/fonts";
 import { NewJerseyServiceMap } from "@/components/ui/NewJerseyServiceMap";
 import { SectionConsultationCta } from "@/components/ui/SectionConsultationCta";
-import { serviceAreas } from "@/lib/seo/areas";
+import { getCountyPagePath, serviceAreas } from "@/lib/seo/areas";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
 export function ServiceAreaSection() {
@@ -99,10 +99,10 @@ export function ServiceAreaSection() {
           {serviceAreas.slice(0, 6).map((area) => (
             <Link
               key={area.slug}
-              href={`/areas/${area.slug}`}
+              href={getCountyPagePath(area.slug)}
               className={`${fontBody} rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-semibold text-neutral-800 transition-colors hover:border-brand-orange hover:text-brand-orange`}
             >
-              {area.name}
+              {area.name.replace(/, NJ$/, "")}
             </Link>
           ))}
         </motion.div>

@@ -25,6 +25,7 @@ const ICON_PX = {
 
 type ServiceCardProps = {
   service: ServiceItem;
+  href?: string;
 };
 
 function ServiceDescription({ text }: { text: string }) {
@@ -51,7 +52,7 @@ function ServiceDescription({ text }: { text: string }) {
   );
 }
 
-export function ServiceCard({ service }: ServiceCardProps) {
+export function ServiceCard({ service, href }: ServiceCardProps) {
   const iconVariant = service.iconSize ?? "default";
 
   return (
@@ -88,7 +89,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
         <ServiceDescription text={service.description} />
 
         <Link
-          href={`/services/${service.slug}`}
+          href={href ?? `/services/${service.slug}`}
           className={`${fontBody} service-view-more relative z-10 mt-5 inline-flex w-fit self-start items-center rounded-full px-5 py-2.5 text-sm font-semibold sm:mt-6`}
         >
           View more

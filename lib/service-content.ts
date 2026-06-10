@@ -140,3 +140,59 @@ export function getServiceDetailContent(slug: string): ServiceDetailContent {
     }
   );
 }
+
+type LocalizedContentContext = {
+  cityName: string;
+  countyName: string;
+};
+
+function localizeServiceCopy(
+  text: string,
+  { cityName, countyName }: LocalizedContentContext,
+): string {
+  return text
+    .replace(
+      /across Bergen County and beyond/gi,
+      `in ${cityName} and throughout ${countyName}`,
+    )
+    .replace(
+      /Bergen County and surrounding communities/gi,
+      `${cityName} and ${countyName}`,
+    )
+    .replace(/across New Jersey/gi, `in ${cityName}, NJ`)
+    .replace(/for New Jersey/gi, `for ${cityName}, NJ`)
+    .replace(/New Jersey homes and businesses/gi, `${cityName} homes and businesses`)
+    .replace(/New Jersey rainfall/gi, `${countyName} rainfall`)
+    .replace(/New Jersey weather/gi, `${countyName} weather`)
+    .replace(/New Jersey seasons/gi, `${countyName} seasons`)
+    .replace(
+      /years of New Jersey roofing and construction experience/gi,
+      `years of roofing and construction experience in ${cityName}`,
+    )
+    .replace(
+      /across New Jersey with quality materials/gi,
+      `in ${cityName}, NJ with quality materials`,
+    );
+}
+
+export function getLocalizedServiceDetailContent(
+  slug: string,
+  context: LocalizedContentContext,
+): ServiceDetailContent {
+  const base = getServiceDetailContent(slug);
+
+  return {
+    about: `${localizeServiceCopy(base.about, context)} Our ${context.cityName} team provides free on-site estimates and warranty-backed work throughout ${context.countyName}.`,
+    whyChoose: [
+      ...base.whyChoose.slice(0, 3).map((item) => localizeServiceCopy(item, context)),
+      `Local ${context.cityName} contractors with fast response across ${context.countyName}.`,
+    ],
+    processSteps: base.processSteps.map((step) => ({
+      title: step.title,
+      description: localizeServiceCopy(step.description, context).replace(
+        "your property",
+        `your ${context.cityName} property`,
+      ),
+    })),
+  };
+}

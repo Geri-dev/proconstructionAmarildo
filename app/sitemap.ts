@@ -1,13 +1,16 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo/constants";
-import { getAllAreaSlugs } from "@/lib/seo/areas";
+import { getAllCityPaths, getAllCountySlugs } from "@/lib/seo/areas";
+import { getAllLocalServicePaths } from "@/lib/seo/local-service-pages";
 import { getAllBlogSlugs } from "@/lib/blog/posts";
 import { getAllServiceSlugs } from "@/lib/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   const serviceSlugs = getAllServiceSlugs();
-  const areaSlugs = getAllAreaSlugs();
+  const countySlugs = getAllCountySlugs();
+  const cityPaths = getAllCityPaths();
+  const localServicePaths = getAllLocalServicePaths();
   const blogSlugs = getAllBlogSlugs();
 
   return [
@@ -59,11 +62,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    ...areaSlugs.map((slug) => ({
+    ...countySlugs.map((slug) => ({
       url: absoluteUrl(`/areas/${slug}`),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.75,
+    })),
+    ...cityPaths.map(({ countySlug, citySlug }) => ({
+      url: absoluteUrl(`/areas/${countySlug}/${citySlug}`),
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...localServicePaths.map(({ slug, countySlug, citySlug }) => ({
+      url: absoluteUrl(`/services/${slug}/${countySlug}/${citySlug}`),
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
     })),
     ...blogSlugs.map((slug) => ({
       url: absoluteUrl(`/blog/${slug}`),

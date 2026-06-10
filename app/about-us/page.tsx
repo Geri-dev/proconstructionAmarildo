@@ -38,7 +38,7 @@ export default function AboutPage() {
         overlapLayout
       />
 
-      <div className="relative z-20 -mt-32 sm:-mt-40 lg:-mt-56">
+      <div className="relative z-20 -mt-24 sm:-mt-32 lg:-mt-44">
         <RaisingStandardSection />
         <StatsSection />
         <WorkingProcessSection />

@@ -6,15 +6,20 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { fontBody, fontDisplay } from "@/app/fonts";
+import { getLocalServicePagePath } from "@/lib/seo/local-service-pages";
 import { getOtherServices } from "@/lib/services";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
 type ServiceOtherServicesSectionProps = {
   currentSlug: string;
+  countySlug?: string;
+  citySlug?: string;
 };
 
 export function ServiceOtherServicesSection({
   currentSlug,
+  countySlug,
+  citySlug,
 }: ServiceOtherServicesSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.1 });
@@ -47,7 +52,18 @@ export function ServiceOtherServicesSection({
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
             >
-              <ServiceCard service={service} />
+              <ServiceCard
+                service={service}
+                href={
+                  countySlug && citySlug
+                    ? getLocalServicePagePath(
+                        service.slug,
+                        countySlug,
+                        citySlug,
+                      )
+                    : undefined
+                }
+              />
             </motion.div>
           ))}
         </div>

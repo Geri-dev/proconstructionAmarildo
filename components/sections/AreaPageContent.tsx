@@ -6,10 +6,10 @@ import { ServicesPageHero } from "@/components/sections/ServicesPageHero";
 import { SectionConsultationCta } from "@/components/ui/SectionConsultationCta";
 import { fontBody, fontDisplay } from "@/app/fonts";
 import { specializedServices } from "@/lib/services";
-import type { ServiceArea } from "@/lib/seo/areas";
+import { getCityPagePath, type CountyArea } from "@/lib/seo/areas";
 
 type AreaPageContentProps = {
-  area: ServiceArea;
+  area: CountyArea;
 };
 
 export function AreaPageContent({ area }: AreaPageContentProps) {
@@ -45,12 +45,6 @@ export function AreaPageContent({ area }: AreaPageContentProps) {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-
-              <p
-                className={`${fontBody} mt-8 text-sm text-neutral-500 sm:text-base`}
-              >
-                Nearby communities we serve: {area.nearby.join(", ")}.
-              </p>
             </div>
 
             <div className="lg:col-span-5">
@@ -82,6 +76,33 @@ export function AreaPageContent({ area }: AreaPageContentProps) {
                 </Link>
               </div>
             </div>
+          </div>
+
+          <div id="cities" className="mt-20 scroll-mt-28 sm:mt-24 lg:mt-28">
+            <h2
+              className={`${fontDisplay} text-3xl tracking-wide text-neutral-900 sm:text-4xl`}
+            >
+              Cities we serve in {area.name.replace(/, NJ$/, "")}
+            </h2>
+            <p
+              className={`${fontBody} mt-4 max-w-2xl text-base leading-relaxed text-neutral-600 sm:text-lg`}
+            >
+              Select your city for local roofing and construction services,
+              free estimates, and area-specific information.
+            </p>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {area.cities.map((city) => (
+                <li key={city.slug}>
+                  <Link
+                    href={getCityPagePath(area.slug, city.slug)}
+                    className={`${fontBody} flex min-h-[48px] items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-800 transition-colors hover:border-brand-orange hover:text-brand-orange sm:text-base`}
+                  >
+                    {city.name}
+                    <ArrowRight className="h-4 w-4 shrink-0 opacity-60" aria-hidden />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <SectionConsultationCta className="mt-20 flex justify-center sm:mt-24 lg:mt-28" />

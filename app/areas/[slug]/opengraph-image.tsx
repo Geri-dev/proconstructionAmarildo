@@ -1,5 +1,5 @@
 import { createOgImageResponse } from "@/lib/seo/og";
-import { getAreaBySlug } from "@/lib/seo/areas";
+import { getCountyBySlug } from "@/lib/seo/areas";
 
 export const alt = "Creative Pro Construction service area";
 export const size = { width: 1200, height: 630 };
@@ -11,7 +11,7 @@ type Props = {
 
 export default async function OpenGraphImage({ params }: Props) {
   const { slug } = await params;
-  const area = getAreaBySlug(slug);
+  const area = getCountyBySlug(slug);
 
   return createOgImageResponse({
     eyebrow: "Service Area",

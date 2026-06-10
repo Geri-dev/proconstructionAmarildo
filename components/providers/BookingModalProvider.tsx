@@ -30,8 +30,9 @@ function getSlugFromPathname(pathname: string): string | undefined {
 }
 
 function getAreaSlugFromPathname(pathname: string): string | undefined {
-  const match = pathname.match(/^\/areas\/([^/]+)/);
-  return match?.[1];
+  const match = pathname.match(/^\/areas\/([^/]+)(?:\/([^/]+))?/);
+  if (!match?.[1]) return undefined;
+  return match[2] ? `${match[1]}/${match[2]}` : match[1];
 }
 
 export function BookingModalProvider({

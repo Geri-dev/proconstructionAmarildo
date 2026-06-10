@@ -10,7 +10,10 @@ import {
   getServiceKeywords,
   PAGE_SEO,
 } from "./page-map";
-import { getAreaKeywords as getLegacyAreaKeywordsFromAreas } from "./areas";
+import {
+  getAreaKeywords as getLegacyAreaKeywordsFromAreas,
+  getCityKeywords as getLegacyCityKeywordsFromAreas,
+} from "./areas";
 import { getBlogKeywords as getLegacyBlogKeywords } from "@/lib/blog/posts";
 
 export {
@@ -95,6 +98,15 @@ export function getAreaKeywords(slug: string): string[] {
   const mapped = getFeaturedAreaKeywords(slug);
   if (mapped.length > 0) return mapped;
   return getLegacyAreaKeywordsFromAreas(slug);
+}
+
+export function getCityPageKeywords(
+  countySlug: string,
+  citySlug: string,
+): string[] {
+  const mapped = getFeaturedAreaKeywords(`${countySlug}/${citySlug}`);
+  if (mapped.length > 0) return mapped;
+  return getLegacyCityKeywordsFromAreas(countySlug, citySlug);
 }
 
 export function getBlogKeywords(slug: string): string[] {

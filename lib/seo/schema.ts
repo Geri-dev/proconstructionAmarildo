@@ -1,7 +1,11 @@
 import { blogPosts } from "@/lib/blog/posts";
 import { faqItems } from "@/lib/faq";
 import { REVIEW_AGGREGATE, reviews } from "@/lib/reviews";
-import { getAreaBySlug, serviceAreas } from "@/lib/seo/areas";
+import {
+  getCityBySlugs,
+  getCountyBySlug,
+  serviceAreas,
+} from "@/lib/seo/areas";
 import { formatServiceTitle, specializedServices } from "@/lib/services";
 import { absoluteUrl, BUSINESS, SITE_NAME, SITE_URL } from "./constants";
 
@@ -232,7 +236,7 @@ export function getGlobalStructuredData() {
 }
 
 export function getAreaServiceSchema(slug: string) {
-  const area = getAreaBySlug(slug);
+  const area = getCountyBySlug(slug);
   if (!area) return null;
 
   return {
@@ -249,6 +253,79 @@ export function getAreaServiceSchema(slug: string) {
       "@type": "AdministrativeArea",
       name: area.name,
     },
+    serviceType: "RoofingContractor",
+  };
+}
+
+export function getLocalServiceSchema(
+  serviceSlug: string,
+  countySlug: string,
+  citySlug: string,
+) {
+  const service = specializedServices.find((entry) => entry.slug === serviceSlug);
+  const city = getCityBySlugs(countySlug, citySlug);
+  if (!service || !city) return null;
+
+  const serviceName = formatServiceTitle(service.title);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": absoluteUrl(
+      `/services/${serviceSlug}/${countySlug}/${citySlug}#service`,
+    ),
+    name: `${serviceName} in ${city.name}`,
+    description: service.description,
+    url: absoluteUrl(`/services/${serviceSlug}/${countySlug}/${citySlug}`),
+    provider: {
+      "@id": `${SITE_URL}/#localbusiness`,
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: city.name,
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: city.countyName,
+      },
+    ],
+    serviceType: serviceName,
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Free estimate and consultation",
+      url: absoluteUrl(`/services/${serviceSlug}/${countySlug}/${citySlug}`),
+    },
+  };
+}
+
+export function getCityServiceSchema(countySlug: string, citySlug: string) {
+  const city = getCityBySlugs(countySlug, citySlug);
+  if (!city) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": absoluteUrl(`/areas/${countySlug}/${citySlug}#city-service`),
+    name: `Roofing & Construction in ${city.name}`,
+    description: city.description,
+    url: absoluteUrl(`/areas/${countySlug}/${citySlug}`),
+    provider: {
+      "@id": `${SITE_URL}/#localbusiness`,
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: city.name,
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: city.countyName,
+      },
+    ],
     serviceType: "RoofingContractor",
   };
 }

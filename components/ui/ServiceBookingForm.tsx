@@ -3,29 +3,89 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { fontBody, fontDisplay } from "@/app/fonts";
+import { LocationSelector } from "@/components/ui/LocationSelector";
 import { sendBookingRequest } from "@/lib/emailjs/send-booking-request";
-import { getAreaBySlug, getNavServiceAreas } from "@/lib/seo/areas";
+import {
+  getBookingLocationValue,
+  getLocationLabel,
+  parseBookingLocationValue,
+} from "@/lib/seo/areas";
 import {
   formatServiceTitle,
   getServiceBySlug,
   specializedServices,
 } from "@/lib/services";
 
-const bookingAreas = getNavServiceAreas();
-
 type ServiceBookingFormProps = {
   defaultServiceSlug: string;
+  defaultCountySlug?: string;
+  defaultCitySlug?: string;
+  /** @deprecated Use defaultCountySlug/defaultCitySlug */
   defaultAreaSlug?: string;
   idPrefix?: string;
   embedded?: boolean;
 };
 
+function parseDefaultLocation(
+  defaultCountySlug?: string,
+  defaultCitySlug?: string,
+  defaultAreaSlug?: string,
+) {
+  if (defaultCountySlug) {
+    return {
+      countySlug: defaultCountySlug,
+      citySlug: defaultCitySlug ?? "",
+      locationValue: getBookingLocationValue(
+        defaultCountySlug,
+        defaultCitySlug,
+      ),
+    };
+  }
+
+  if (defaultAreaSlug) {
+    const legacy = defaultAreaSlug.match(/^([^/]+)(?:\/(.+))?$/);
+    if (legacy) {
+      const countySlug = legacy[1] ?? "";
+      const citySlug = legacy[2] ?? "";
+      const parsed = parseBookingLocationValue(
+        getBookingLocationValue(countySlug, citySlug || undefined),
+      );
+      if (parsed) {
+        return {
+          countySlug: parsed.countySlug,
+          citySlug: parsed.citySlug ?? "",
+          locationValue: getBookingLocationValue(
+            parsed.countySlug,
+            parsed.citySlug,
+          ),
+        };
+      }
+    }
+  }
+
+  return {
+    countySlug: "",
+    citySlug: "",
+    locationValue: "",
+  };
+}
+
 export function ServiceBookingForm({
   defaultServiceSlug,
+  defaultCountySlug,
+  defaultCitySlug,
   defaultAreaSlug,
   idPrefix = "booking",
   embedded = false,
 }: ServiceBookingFormProps) {
+  const defaults = parseDefaultLocation(
+    defaultCountySlug,
+    defaultCitySlug,
+    defaultAreaSlug,
+  );
+  const [countySlug, setCountySlug] = useState(defaults.countySlug);
+  const [citySlug, setCitySlug] = useState(defaults.citySlug);
+  const [locationValue, setLocationValue] = useState(defaults.locationValue);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,13 +101,12 @@ export function ServiceBookingForm({
     const streetAddress = String(formData.get("streetAddress") ?? "").trim();
     const contactTime = String(formData.get("contactTime") ?? "").trim();
     const serviceSlug = String(formData.get("service") ?? defaultServiceSlug);
-    const areaSlug = String(formData.get("area") ?? "").trim();
+    const areaSlug = String(formData.get("area") ?? locationValue).trim();
     const service = getServiceBySlug(serviceSlug);
-    const area = getAreaBySlug(areaSlug);
+    const areaLabel = getLocationLabel(areaSlug) ?? areaSlug;
     const serviceLabel = service
       ? formatServiceTitle(service.title)
       : serviceSlug;
-    const areaLabel = area?.name ?? areaSlug;
 
     try {
       await sendBookingRequest({
@@ -70,17 +129,27 @@ export function ServiceBookingForm({
     }
   }
 
+  function handleCountyChange(nextCounty: string) {
+    setCountySlug(nextCounty);
+    setCitySlug("");
+    setLocationValue("");
+  }
+
+  function handleCityChange(nextCity: string) {
+    setCitySlug(nextCity);
+    setLocationValue(
+      countySlug && nextCity
+        ? getBookingLocationValue(countySlug, nextCity)
+        : "",
+    );
+  }
+
   const inputClass = `${fontBody} w-full rounded-xl border border-neutral-200 bg-white px-4 ${embedded ? "py-2.5 sm:py-3" : "py-3"} text-sm text-neutral-900 placeholder:text-neutral-400 outline-none transition-colors focus:border-brand-accent disabled:cursor-not-allowed disabled:opacity-60 sm:text-base`;
   const nameId = `${idPrefix}-name`;
   const phoneId = `${idPrefix}-phone`;
   const streetAddressId = `${idPrefix}-street-address`;
-  const areaId = `${idPrefix}-area`;
   const timeId = `${idPrefix}-time`;
   const serviceId = `${idPrefix}-service`;
-  const selectedAreaSlug =
-    defaultAreaSlug && getAreaBySlug(defaultAreaSlug)
-      ? defaultAreaSlug
-      : "";
 
   const content = (
     <>
@@ -159,37 +228,17 @@ export function ServiceBookingForm({
             />
           </div>
 
-          <div>
-            <label
-              htmlFor={areaId}
-              className={`${fontBody} mb-1.5 block text-sm font-medium text-neutral-800`}
-            >
-              Select area
-            </label>
-            <div className="relative">
-              <select
-                id={areaId}
-                name="area"
-                required
-                defaultValue={selectedAreaSlug}
-                disabled={submitting}
-                className={`${inputClass} appearance-none pr-10`}
-              >
-                <option value="" disabled>
-                  Choose your city or county
-                </option>
-                {bookingAreas.map((area) => (
-                  <option key={area.slug} value={area.slug}>
-                    {area.name}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown
-                className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-500"
-                aria-hidden
-              />
-            </div>
-          </div>
+          <LocationSelector
+            countyValue={countySlug}
+            cityValue={citySlug}
+            onCountyChange={handleCountyChange}
+            onCityChange={handleCityChange}
+            disabled={submitting}
+            required
+            countyName="county"
+            cityName="city"
+          />
+          <input type="hidden" name="area" value={locationValue} required />
 
           <div>
             <label
@@ -247,7 +296,7 @@ export function ServiceBookingForm({
 
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !locationValue}
             className={`${fontBody} mt-2 w-full rounded-xl bg-brand-accent px-6 py-3.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-brand-accent-light disabled:cursor-not-allowed disabled:opacity-70 sm:text-base`}
           >
             {submitting ? "Sending..." : "Request a call"}

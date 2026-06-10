@@ -1,0 +1,319 @@
+{
+  "counties": [
+    {
+      "name": "Atlantic County",
+      "cities": [
+        "Atlantic City",
+        "Egg Harbor Township",
+        "Pleasantville",
+        "Hammonton",
+        "Absecon",
+        "Brigantine",
+        "Ventnor City",
+        "Margate City",
+        "Somers Point",
+        "Linwood"
+      ]
+    },
+    {
+      "name": "Bergen County",
+      "cities": [
+        "Hackensack",
+        "Paramus",
+        "Fort Lee",
+        "Teaneck",
+        "Englewood",
+        "Ridgewood",
+        "Fair Lawn",
+        "Garfield",
+        "Bergenfield",
+        "Mahwah"
+      ]
+    },
+    {
+      "name": "Burlington County",
+      "cities": [
+        "Mount Laurel",
+        "Evesham Township",
+        "Marlton",
+        "Moorestown",
+        "Burlington",
+        "Medford",
+        "Willingboro",
+        "Lumberton",
+        "Delran",
+        "Cinnaminson"
+      ]
+    },
+    {
+      "name": "Camden County",
+      "cities": [
+        "Camden",
+        "Cherry Hill",
+        "Pennsauken",
+        "Gloucester Township",
+        "Winslow Township",
+        "Voorhees",
+        "Haddonfield",
+        "Collingswood",
+        "Lindenwold",
+        "Bellmawr"
+      ]
+    },
+    {
+      "name": "Cape May County",
+      "cities": [
+        "Ocean City",
+        "Cape May",
+        "Wildwood",
+        "Wildwood Crest",
+        "Sea Isle City",
+        "Avalon",
+        "Stone Harbor",
+        "Lower Township",
+        "Middle Township",
+        "North Wildwood"
+      ]
+    },
+    {
+      "name": "Cumberland County",
+      "cities": [
+        "Vineland",
+        "Bridgeton",
+        "Millville",
+        "Commercial Township",
+        "Deerfield Township",
+        "Fairfield Township",
+        "Hopewell Township",
+        "Maurice River Township",
+        "Greenwich Township",
+        "Lawrence Township"
+      ]
+    },
+    {
+      "name": "Essex County",
+      "cities": [
+        "Newark",
+        "East Orange",
+        "Irvington",
+        "Bloomfield",
+        "Montclair",
+        "West Orange",
+        "Orange",
+        "Livingston",
+        "Belleville",
+        "Nutley"
+      ]
+    },
+    {
+      "name": "Gloucester County",
+      "cities": [
+        "Washington Township",
+        "Deptford",
+        "Glassboro",
+        "Monroe Township",
+        "Mantua Township",
+        "West Deptford",
+        "Harrison Township",
+        "Clayton",
+        "Woodbury",
+        "Pitman"
+      ]
+    },
+    {
+      "name": "Hudson County",
+      "cities": [
+        "Jersey City",
+        "Hoboken",
+        "Bayonne",
+        "Union City",
+        "North Bergen",
+        "West New York",
+        "Secaucus",
+        "Kearny",
+        "Weehawken",
+        "Guttenberg"
+      ]
+    },
+    {
+      "name": "Hunterdon County",
+      "cities": [
+        "Flemington",
+        "Clinton",
+        "Raritan Township",
+        "Readington Township",
+        "Lebanon Township",
+        "Tewksbury Township",
+        "Delaware Township",
+        "East Amwell Township",
+        "Holland Township",
+        "Kingwood Township"
+      ]
+    },
+    {
+      "name": "Mercer County",
+      "cities": [
+        "Trenton",
+        "Hamilton Township",
+        "Princeton",
+        "Lawrence Township",
+        "Ewing Township",
+        "Hopewell Township",
+        "Robbinsville",
+        "West Windsor",
+        "Pennington",
+        "Hightstown"
+      ]
+    },
+    {
+      "name": "Middlesex County",
+      "cities": [
+        "Edison",
+        "New Brunswick",
+        "Woodbridge",
+        "Perth Amboy",
+        "Piscataway",
+        "East Brunswick",
+        "South Brunswick",
+        "Old Bridge",
+        "Sayreville",
+        "Carteret"
+      ]
+    },
+    {
+      "name": "Monmouth County",
+      "cities": [
+        "Middletown",
+        "Freehold",
+        "Long Branch",
+        "Marlboro",
+        "Manalapan",
+        "Howell",
+        "Neptune",
+        "Asbury Park",
+        "Red Bank",
+        "Hazlet"
+      ]
+    },
+    {
+      "name": "Morris County",
+      "cities": [
+        "Parsippany",
+        "Morristown",
+        "Dover",
+        "Randolph",
+        "Rockaway",
+        "Denville",
+        "Madison",
+        "Chatham",
+        "Mount Olive",
+        "Florham Park"
+      ]
+    },
+    {
+      "name": "Ocean County",
+      "cities": [
+        "Toms River",
+        "Lakewood",
+        "Brick Township",
+        "Jackson Township",
+        "Manchester Township",
+        "Point Pleasant",
+        "Barnegat",
+        "Berkeley Township",
+        "Lacey Township",
+        "Stafford Township"
+      ]
+    },
+    {
+      "name": "Passaic County",
+      "cities": [
+        "Paterson",
+        "Clifton",
+        "Passaic",
+        "Wayne",
+        "West Milford",
+        "Little Falls",
+        "Totowa",
+        "Woodland Park",
+        "Hawthorne",
+        "Ringwood"
+      ]
+    },
+    {
+      "name": "Salem County",
+      "cities": [
+        "Salem",
+        "Pennsville",
+        "Woodstown",
+        "Carneys Point",
+        "Elsinboro Township",
+        "Mannington Township",
+        "Pilesgrove Township",
+        "Pittsgrove Township",
+        "Upper Pittsgrove Township",
+        "Quinton Township"
+      ]
+    },
+    {
+      "name": "Somerset County",
+      "cities": [
+        "Bridgewater",
+        "Hillsborough",
+        "Somerville",
+        "Franklin Township",
+        "Bernards Township",
+        "Bound Brook",
+        "Raritan",
+        "Warren Township",
+        "Montgomery Township",
+        "Manville"
+      ]
+    },
+    {
+      "name": "Sussex County",
+      "cities": [
+        "Newton",
+        "Sparta",
+        "Vernon",
+        "Hopatcong",
+        "Hardyston",
+        "Andover",
+        "Hamburg",
+        "Franklin",
+        "Wantage",
+        "Byram"
+      ]
+    },
+    {
+      "name": "Union County",
+      "cities": [
+        "Elizabeth",
+        "Union",
+        "Plainfield",
+        "Linden",
+        "Rahway",
+        "Westfield",
+        "Cranford",
+        "Scotch Plains",
+        "Roselle",
+        "Clark"
+      ]
+    },
+    {
+      "name": "Warren County",
+      "cities": [
+        "Phillipsburg",
+        "Hackettstown",
+        "Washington",
+        "Mansfield Township",
+        "Belvidere",
+        "Independence Township",
+        "Blairstown",
+        "Greenwich Township",
+        "Alpha",
+        "Lopatcong Township"
+      ]
+    }
+  ]
+}

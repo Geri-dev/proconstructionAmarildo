@@ -233,9 +233,12 @@ export const PAGE_SEO = {
   },
 
   areas: {
-    "newark-nj": {
-      path: "/areas/newark-nj",
-      aliases: ["/roofing-contractor-newark-nj"],
+    "essex-county/newark": {
+      path: "/areas/essex-county/newark",
+      aliases: [
+        "/areas/newark-nj",
+        "/roofing-contractor-newark-nj",
+      ],
       primaryKeyword: "roofing contractor newark nj",
       secondaryKeywords: [
         "roof repair newark new jersey",
@@ -249,9 +252,12 @@ export const PAGE_SEO = {
         "Licensed roofing contractor in Newark, NJ — installation, replacement, chimney repair, gutters, and exterior work. Free on-site estimates from Creative Pro Construction.",
       h1: "Roofing & Construction in Newark, NJ",
     },
-    "jersey-city-nj": {
-      path: "/areas/jersey-city-nj",
-      aliases: ["/roofing-company-jersey-city-nj"],
+    "hudson-county/jersey-city": {
+      path: "/areas/hudson-county/jersey-city",
+      aliases: [
+        "/areas/jersey-city-nj",
+        "/roofing-company-jersey-city-nj",
+      ],
       primaryKeyword: "roofing company jersey city nj",
       secondaryKeywords: [
         "roof installation jersey city",
@@ -265,9 +271,12 @@ export const PAGE_SEO = {
         "Jersey City roofing company for installation, replacement, gutters, and chimney services. Hudson County contractor with free on-site estimates.",
       h1: "Roofing & Exterior Services in Jersey City, NJ",
     },
-    "edison-nj": {
-      path: "/areas/edison-nj",
-      aliases: ["/roof-replacement-edison-nj"],
+    "middlesex-county/edison": {
+      path: "/areas/middlesex-county/edison",
+      aliases: [
+        "/areas/edison-nj",
+        "/roof-replacement-edison-nj",
+      ],
       primaryKeyword: "roof replacement edison nj",
       secondaryKeywords: [
         "roofing contractor edison nj",

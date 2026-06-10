@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AreaPageContent } from "@/components/sections/AreaPageContent";
 import {
-  getAllAreaSlugs,
-  getAreaBySlug,
+  getAllCountySlugs,
+  getCountyBySlug,
 } from "@/lib/seo/areas";
-import { getAreaKeywords, getFeaturedAreaPageSeo } from "@/lib/seo/keywords";
+import { getAreaKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
   getAreaServiceSchema,
@@ -18,14 +18,14 @@ type AreaPageProps = {
 };
 
 export function generateStaticParams() {
-  return getAllAreaSlugs().map((slug) => ({ slug }));
+  return getAllCountySlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: AreaPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const area = getAreaBySlug(slug);
+  const area = getCountyBySlug(slug);
 
   if (!area) {
     return createPageMetadata({
@@ -35,11 +35,9 @@ export async function generateMetadata({
     });
   }
 
-  const seo = getFeaturedAreaPageSeo(slug);
-
   return createPageMetadata({
-    title: seo?.title ?? `Roofing Contractor in ${area.name}`,
-    description: seo?.description ?? area.description,
+    title: `Roofing Contractor in ${area.name}`,
+    description: area.description,
     path: `/areas/${slug}`,
     keywords: getAreaKeywords(slug),
   });
@@ -47,7 +45,7 @@ export async function generateMetadata({
 
 export default async function AreaPage({ params }: AreaPageProps) {
   const { slug } = await params;
-  const area = getAreaBySlug(slug);
+  const area = getCountyBySlug(slug);
 
   if (!area) {
     notFound();
