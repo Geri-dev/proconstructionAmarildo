@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { fontBody, fontDisplay } from "@/app/fonts";
-import { LocationSelector } from "@/components/ui/LocationSelector";
+import { SearchableSelect } from "@/components/ui/SearchableSelect";
 import { sendBookingRequest } from "@/lib/emailjs/send-booking-request";
 import {
   getBookingLocationValue,
   getLocationLabel,
+  getNavCounties,
   parseBookingLocationValue,
 } from "@/lib/seo/areas";
 import {
@@ -34,11 +35,7 @@ function parseDefaultLocation(
   if (defaultCountySlug) {
     return {
       countySlug: defaultCountySlug,
-      citySlug: defaultCitySlug ?? "",
-      locationValue: getBookingLocationValue(
-        defaultCountySlug,
-        defaultCitySlug,
-      ),
+      locationValue: getBookingLocationValue(defaultCountySlug),
     };
   }
 
@@ -46,18 +43,11 @@ function parseDefaultLocation(
     const legacy = defaultAreaSlug.match(/^([^/]+)(?:\/(.+))?$/);
     if (legacy) {
       const countySlug = legacy[1] ?? "";
-      const citySlug = legacy[2] ?? "";
-      const parsed = parseBookingLocationValue(
-        getBookingLocationValue(countySlug, citySlug || undefined),
-      );
+      const parsed = parseBookingLocationValue(countySlug);
       if (parsed) {
         return {
           countySlug: parsed.countySlug,
-          citySlug: parsed.citySlug ?? "",
-          locationValue: getBookingLocationValue(
-            parsed.countySlug,
-            parsed.citySlug,
-          ),
+          locationValue: getBookingLocationValue(parsed.countySlug),
         };
       }
     }
@@ -65,7 +55,6 @@ function parseDefaultLocation(
 
   return {
     countySlug: "",
-    citySlug: "",
     locationValue: "",
   };
 }
@@ -84,11 +73,19 @@ export function ServiceBookingForm({
     defaultAreaSlug,
   );
   const [countySlug, setCountySlug] = useState(defaults.countySlug);
-  const [citySlug, setCitySlug] = useState(defaults.citySlug);
   const [locationValue, setLocationValue] = useState(defaults.locationValue);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const countyOptions = useMemo(
+    () =>
+      getNavCounties().map((county) => ({
+        value: county.slug,
+        label: county.name,
+      })),
+    [],
+  );
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -131,23 +128,16 @@ export function ServiceBookingForm({
 
   function handleCountyChange(nextCounty: string) {
     setCountySlug(nextCounty);
-    setCitySlug("");
-    setLocationValue("");
-  }
-
-  function handleCityChange(nextCity: string) {
-    setCitySlug(nextCity);
     setLocationValue(
-      countySlug && nextCity
-        ? getBookingLocationValue(countySlug, nextCity)
-        : "",
+      nextCounty ? getBookingLocationValue(nextCounty) : "",
     );
   }
 
   const inputClass = `${fontBody} w-full rounded-xl border border-neutral-200 bg-white px-4 ${embedded ? "py-2.5 sm:py-3" : "py-3"} text-sm text-neutral-900 placeholder:text-neutral-400 outline-none transition-colors focus:border-brand-accent disabled:cursor-not-allowed disabled:opacity-60 sm:text-base`;
   const nameId = `${idPrefix}-name`;
   const phoneId = `${idPrefix}-phone`;
-  const streetAddressId = `${idPrefix}-street-address`;
+  const addressId = `${idPrefix}-address`;
+  const countyId = `${idPrefix}-county`;
   const timeId = `${idPrefix}-time`;
   const serviceId = `${idPrefix}-service`;
 
@@ -211,32 +201,34 @@ export function ServiceBookingForm({
 
           <div>
             <label
-              htmlFor={streetAddressId}
+              htmlFor={addressId}
               className={`${fontBody} mb-1.5 block text-sm font-medium text-neutral-800`}
             >
-              Street Address
+              Address
             </label>
             <input
-              id={streetAddressId}
+              id={addressId}
               name="streetAddress"
               type="text"
               required
               disabled={submitting}
               autoComplete="street-address"
-              placeholder="123 Main St, Clifton, NJ"
+              placeholder="123 Main St, Clifton"
               className={inputClass}
             />
           </div>
 
-          <LocationSelector
-            countyValue={countySlug}
-            cityValue={citySlug}
-            onCountyChange={handleCountyChange}
-            onCityChange={handleCityChange}
+          <SearchableSelect
+            id={countyId}
+            label="County"
+            placeholder="Select county"
+            searchPlaceholder="Search counties..."
+            options={countyOptions}
+            value={countySlug}
+            onChange={handleCountyChange}
             disabled={submitting}
             required
-            countyName="county"
-            cityName="city"
+            name="county"
           />
           <input type="hidden" name="area" value={locationValue} required />
 
@@ -296,7 +288,7 @@ export function ServiceBookingForm({
 
           <button
             type="submit"
-            disabled={submitting || !locationValue}
+            disabled={submitting || !countySlug}
             className={`${fontBody} mt-2 w-full rounded-xl bg-brand-accent px-6 py-3.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-brand-accent-light disabled:cursor-not-allowed disabled:opacity-70 sm:text-base`}
           >
             {submitting ? "Sending..." : "Request a call"}

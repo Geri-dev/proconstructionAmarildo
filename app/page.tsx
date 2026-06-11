@@ -31,10 +31,10 @@ export default function Home() {
       <StatsSection />
       <WhyChooseSection />
       <RaisingStandardSection />
+      <SpecializedServicesSection />
       <ExcellenceWorkSection />
       <ServiceAreaSection />
       <WorkingProcessSection />
-      <SpecializedServicesSection />
       <RoofRepairBeforeAfterSection />
       <BrandsCarouselSection />
       <ReviewsSection />

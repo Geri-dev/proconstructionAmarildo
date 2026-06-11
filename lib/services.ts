@@ -124,7 +124,7 @@ export const specializedServices: ServiceItem[] = [
   },
 ];
 
-export const homeSpecializedServices = specializedServices.slice(0, 6);
+export const homeSpecializedServices = specializedServices.slice(0, 7);
 
 export function getServiceBySlug(slug: string): ServiceItem | undefined {
   return specializedServices.find((service) => service.slug === slug);

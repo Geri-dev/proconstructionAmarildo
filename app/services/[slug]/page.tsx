@@ -74,7 +74,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         ]}
       />
       <ServiceDetailLayout service={service} />
-      <AreasCardsSection limit={6} showExploreAll />
+      <AreasCardsSection showExploreAll />
       <ServiceOtherServicesSection currentSlug={service.slug} />
     </main>
   );
