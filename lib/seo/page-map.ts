@@ -134,21 +134,21 @@ export const PAGE_SEO = {
         "Full roof replacement in New Jersey — safe tear-offs, decking repair, and code-compliant shingle systems. Storm damage, aging roofs, and leak prevention. Free estimates.",
       h1: "Roof Replacement in New Jersey",
     },
-    "roof-fitting": {
-      path: "/services/roof-fitting",
-      aliases: ["/roof-fitting-nj"],
-      primaryKeyword: "roof fitting services nj",
+    "roof-repair": {
+      path: "/services/roof-repair",
+      aliases: ["/roof-repair-nj", "/roof-fitting-nj", "/services/roof-fitting"],
+      primaryKeyword: "roof repair nj",
       secondaryKeywords: [
-        "structural roof installation nj",
-        "roof truss fitting nj",
-        "custom roof fitting new jersey",
-        "pitched roof fitting nj",
+        "emergency roof repair new jersey",
+        "leak repair roofing nj",
+        "storm damage roof repair nj",
+        "shingle roof repair nj",
       ],
-      intent: "Commercial",
-      title: "Roof Fitting Services NJ",
+      intent: "Transactional",
+      title: "Roof Repair NJ",
       description:
-        "Expert roof fitting for additions, dormers, and complex pitches across New Jersey. Structural alignment, ventilation, and seamless integration with your existing roof.",
-      h1: "Roof Fitting Services in New Jersey",
+        "Professional roof repair in New Jersey — leak fixes, storm damage, missing shingles, and flashing repairs. Licensed crews, fast response, free estimates.",
+      h1: "Roof Repair in New Jersey",
     },
     "gutter-installation-repair": {
       path: "/services/gutter-installation-repair",
@@ -182,21 +182,25 @@ export const PAGE_SEO = {
         "Chimney repair, flashing, caps, and masonry restoration in New Jersey. Stop leaks and preserve structural integrity before interior water damage starts.",
       h1: "Chimney Repair & Services in New Jersey",
     },
-    stairs: {
-      path: "/services/stairs",
-      aliases: ["/exterior-stairs-construction-nj"],
-      primaryKeyword: "exterior stairs construction nj",
+    steps: {
+      path: "/services/steps",
+      aliases: [
+        "/exterior-steps-construction-nj",
+        "/exterior-stairs-construction-nj",
+        "/services/stairs",
+      ],
+      primaryKeyword: "exterior steps construction nj",
       secondaryKeywords: [
         "concrete steps installation nj",
-        "outdoor stair building new jersey",
+        "outdoor step building new jersey",
         "front steps replacement nj",
         "porch steps construction nj",
       ],
       intent: "Transactional",
-      title: "Exterior Stairs Construction NJ",
+      title: "Exterior Steps Construction NJ",
       description:
-        "Exterior and structural stair construction in New Jersey — code-compliant treads, railings, and weather-resistant finishes for entry steps and multi-level access.",
-      h1: "Exterior Stairs Construction in New Jersey",
+        "Exterior and structural step construction in New Jersey — code-compliant treads, railings, and weather-resistant finishes for entry steps and multi-level access.",
+      h1: "Exterior Steps Construction in New Jersey",
     },
     masonry: {
       path: "/services/masonry",

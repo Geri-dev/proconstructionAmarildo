@@ -39,7 +39,7 @@ export function GalleryCollageSection({ images }: GalleryCollageSectionProps) {
           <p
             className={`${fontBody} mt-4 text-base leading-relaxed text-neutral-600 sm:mt-5 sm:text-lg`}
           >
-            Roofing, chimney, masonry, stairs, and exterior work across New Jersey.
+            Roofing, chimney, masonry, steps, and exterior work across New Jersey.
             Vertical and horizontal photos keep their natural proportions in a collage
             layout so you can browse real project results at a glance.
           </p>

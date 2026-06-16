@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = createPageMetadata({
   title: "Roofing & Construction Services in New Jersey",
   description:
-    "Explore roof installation, roof replacement, roof fitting, gutters, chimney services, stairs, masonry, and siding. Licensed Creative Pro Construction serves homeowners across New Jersey.",
+    "Explore roof installation, roof replacement, roof repair, gutters, chimney services, steps, masonry, and siding. Licensed Creative Pro Construction serves homeowners across New Jersey.",
   path: "/services",
   keywords: getServicesPageKeywords(),
 });

@@ -54,7 +54,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
   const areaSchema = getAreaServiceSchema(slug);
 
   return (
-    <main className="relative bg-white">
+    <>
       <JsonLd
         data={[
           getBreadcrumbSchema([
@@ -66,6 +66,6 @@ export default async function AreaPage({ params }: AreaPageProps) {
         ]}
       />
       <AreaPageContent area={area} />
-    </main>
+    </>
   );
 }

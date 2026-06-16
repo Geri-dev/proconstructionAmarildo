@@ -71,7 +71,7 @@ function buildCountyArea(countyData: NjCountyData): CountyArea {
     highlights: [
       `Serving ${topCities}, and all of ${countyName}`,
       "Roof installation, replacement, and storm damage repair",
-      "Gutters, chimney, masonry, siding, and exterior stairs",
+      "Gutters, chimney, masonry, siding, and exterior steps",
       "Free on-site estimates and written warranties",
     ],
     keywords: [

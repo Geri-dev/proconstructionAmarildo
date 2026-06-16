@@ -3,7 +3,7 @@ import path from "path";
 
 export type GalleryOrientation = "vertical" | "horizontal" | "square";
 
-export type GalleryCategory = "roofing" | "stairs" | "chimney" | "masonry" | "other";
+export type GalleryCategory = "roofing" | "steps" | "chimney" | "masonry" | "other";
 
 export type GalleryImage = {
   id: string;
@@ -23,8 +23,8 @@ function getGalleryCategory(filename: string): GalleryCategory {
   if (lower.includes("roofing") || lower.includes("roffing") || lower.includes("roof")) {
     return "roofing";
   }
-  if (lower.includes("stair")) {
-    return "stairs";
+  if (lower.includes("stair") || lower.includes("step")) {
+    return "steps";
   }
   if (lower.includes("chimney")) {
     return "chimney";

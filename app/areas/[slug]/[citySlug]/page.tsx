@@ -66,7 +66,7 @@ export default async function CityPage({ params }: CityPageProps) {
   const citySchema = getCityServiceSchema(slug, citySlug);
 
   return (
-    <main className="relative bg-white">
+    <>
       <JsonLd
         data={[
           getBreadcrumbSchema([
@@ -79,6 +79,6 @@ export default async function CityPage({ params }: CityPageProps) {
         ]}
       />
       <CityPageContent city={city} county={county} />
-    </main>
+    </>
   );
 }

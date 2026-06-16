@@ -20,7 +20,7 @@ const services: ServiceItem[] = [
   { label: "Roof Replacement", icon: roofIcon },
   { label: "Chimney", icon: chimneyIcon },
   { label: "Siding", icon: sidingIcon },
-  { label: "Stairs", icon: stairsIcon },
+  { label: "Steps", icon: stairsIcon },
   { label: "Masonry", icon: masonryIcon },
   { label: "Gutters", icon: gutterIcon },
 ];

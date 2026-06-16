@@ -54,15 +54,15 @@ export const specializedServices: ServiceItem[] = [
     iconSize: "large",
   },
   {
-    slug: "roof-fitting",
+    slug: "roof-repair",
     number: "03",
-    title: "ROOF FITTING",
+    title: "ROOF REPAIR",
     description:
-      "Accurate roof fitting for additions, dormers, and complex pitches so every plane aligns, vents correctly, and sheds water. Our team measures, templates, and installs custom-fit solutions for a seamless finished look.",
+      "Expert roof repair for leaks, storm damage, missing shingles, and flashing failures. Our licensed crews diagnose problems quickly and restore your roof's protection with durable, code-compliant fixes.",
     image: roofFittingIcon,
-    imageAlt: "Roof fitting service icon",
+    imageAlt: "Roof repair service icon",
     detailImage: roofFittingDetailImage,
-    detailImageAlt: "Custom roof fitting and framing work",
+    detailImageAlt: "Professional roof repair work on a New Jersey home",
     iconSize: "xxlarge",
   },
   {
@@ -90,15 +90,15 @@ export const specializedServices: ServiceItem[] = [
     iconSize: "xlarge",
   },
   {
-    slug: "stairs",
+    slug: "steps",
     number: "06",
-    title: "STAIRS",
+    title: "STEPS",
     description:
-      "Exterior and structural stair construction built to code with safe treads, railings, and weather-resistant finishes. From entry steps to multi-level access, we deliver sturdy stairs that match your home’s design.",
+      "Exterior and structural step construction built to code with safe treads, railings, and weather-resistant finishes. From entry steps to multi-level access, we deliver sturdy steps that match your home's design.",
     image: stairsIcon,
-    imageAlt: "Stairs construction service icon",
+    imageAlt: "Steps construction service icon",
     detailImage: stairsDetailImage,
-    detailImageAlt: "Exterior stair construction detail",
+    detailImageAlt: "Exterior step construction detail",
   },
   {
     slug: "masonry",

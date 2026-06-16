@@ -7,7 +7,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "What types of roofs do you install in New Jersey?",
     answer:
-      "Creative Pro Construction installs asphalt architectural shingles, flat and low-slope roofing systems, and complete re-roofing packages for residential and commercial properties across New Jersey. We also handle roof fitting for additions, dormers, and complex pitches paired with ice-and-water shield, precision flashing, and ventilation upgrades for long-lasting protection against NJ weather.",
+      "Creative Pro Construction installs asphalt architectural shingles, flat and low-slope roofing systems, and complete re-roofing packages for residential and commercial properties across New Jersey. We also handle roof repair for leaks, storm damage, and flashing failures paired with ice-and-water shield, precision flashing, and ventilation upgrades for long-lasting protection against NJ weather.",
   },
   {
     question: "How long does a roof installation or replacement take?",

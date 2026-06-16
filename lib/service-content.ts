@@ -62,13 +62,13 @@ export const serviceDetailContent: Record<string, ServiceDetailContent> = {
     ],
     processSteps: defaultProcess,
   },
-  "roof-fitting": {
+  "roof-repair": {
     about:
-      "Accurate roof fitting is essential for additions, dormers, and complex pitches. Our team measures, templates, and installs custom-fit solutions so every plane aligns, vents correctly, and sheds water for a seamless finished look.",
+      "Timely roof repair stops leaks, storm damage, and wear before they lead to costly interior damage. Our team inspects shingles, flashing, vents, and decking, then applies durable fixes that restore protection and extend the life of your roofing system.",
     whyChoose: [
-      "Precise measurements and templating for additions and custom roof geometry.",
-      "Seamless integration with existing roofing and flashing systems.",
-      "Attention to pitch, drainage, and ventilation on every plane.",
+      "Fast leak diagnosis and targeted repairs for shingles, flashing, and vents.",
+      "Storm damage inspections with clear documentation for insurance claims.",
+      "Code-compliant workmanship that integrates with your existing roof system.",
       ...defaultWhyChoose.slice(3),
     ],
     processSteps: defaultProcess,
@@ -95,9 +95,9 @@ export const serviceDetailContent: Record<string, ServiceDetailContent> = {
     ],
     processSteps: defaultProcess,
   },
-  stairs: {
+  steps: {
     about:
-      "We build exterior and structural stairs to code with safe treads, railings, and weather-resistant finishes. From entry steps to multi-level access, our stairs are sturdy, attractive, and built to match your home's design.",
+      "We build exterior and structural steps to code with safe treads, railings, and weather-resistant finishes. From entry steps to multi-level access, our steps are sturdy, attractive, and built to match your home's design.",
     whyChoose: [
       "Code-compliant tread depth, rise, and railing height on every build.",
       "Weather-resistant materials and finishes for New Jersey seasons.",

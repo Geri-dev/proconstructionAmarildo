@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { LocationSummarySection } from "@/components/sections/LocationSummarySection";
 import { ServicesPageHero } from "@/components/sections/ServicesPageHero";
 import { SectionConsultationCta } from "@/components/ui/SectionConsultationCta";
 import { fontBody, fontDisplay } from "@/app/fonts";
@@ -13,6 +14,7 @@ import {
   type CountyArea,
 } from "@/lib/seo/areas";
 import { getLocalServicePagePath } from "@/lib/seo/local-service-pages";
+import { getCitySummary } from "@/lib/seo/location-summary";
 
 type CityPageContentProps = {
   city: CityArea;
@@ -113,6 +115,15 @@ export function CityPageContent({ city, county }: CityPageContentProps) {
               </div>
             </div>
           </div>
+
+          <LocationSummarySection
+            className="mt-20 sm:mt-24 lg:mt-28"
+            locationName={city.name}
+            summary={getCitySummary({
+              name: city.name,
+              countyName: county.name,
+            })}
+          />
 
           {otherCities.length > 0 ? (
             <div className="mt-20 sm:mt-24 lg:mt-28">
