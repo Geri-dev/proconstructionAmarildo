@@ -74,6 +74,10 @@ export const rootMetadata: Metadata = {
     "geo.region": "US-NJ",
     "geo.placename": "Clifton",
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export function createPageMetadata({

@@ -75,20 +75,20 @@ export function Hero() {
 
       <Header />
 
-      <div className="hero-mobile-shell relative z-10 mx-auto flex h-full min-h-0 w-full max-w-7xl flex-col px-4 sm:px-6 lg:justify-center lg:px-8 lg:pb-0 lg:pt-36 xl:pt-40">
-        <div className="flex min-h-0 flex-1 flex-col justify-start max-lg:overflow-y-auto max-lg:pb-24 max-lg:pt-[8.25rem] sm:max-lg:pt-[8.75rem] lg:flex-none lg:overflow-visible lg:pb-0 lg:pt-0">
+      <div className="hero-mobile-shell hero-laptop-shell relative z-10 mx-auto flex h-full min-h-0 w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8 lg:pt-0 xl:justify-center xl:px-8 xl:pb-0 xl:pt-40">
+        <div className="hero-laptop-content flex min-h-0 flex-1 flex-col justify-start max-lg:overflow-y-auto max-lg:pb-24 max-lg:pt-[8.25rem] sm:max-lg:pt-[8.75rem] lg:flex-none lg:overflow-visible lg:pb-0 lg:pt-0 xl:pb-0 xl:pt-0">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex w-full max-w-3xl flex-col gap-3 sm:gap-4 lg:gap-5"
+          className="hero-laptop-stack flex w-full max-w-3xl flex-col gap-3 sm:gap-4 lg:gap-3.5 xl:gap-5"
         >
           <div className="space-y-1">
             {headlineLines.map((line) => (
               <motion.h1
                 key={line}
                 variants={variants}
-                className={`${fontDisplay} text-[2.35rem] leading-[0.92] tracking-wide text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.75rem] 2xl:text-[6.5rem]`}
+                className={`hero-laptop-headline ${fontDisplay} text-[2.35rem] leading-[0.92] tracking-wide text-white sm:text-5xl md:text-6xl lg:text-[3.35rem] xl:text-7xl 2xl:text-[6.5rem]`}
               >
                 {line}
               </motion.h1>
@@ -101,7 +101,7 @@ export function Hero() {
 
           <motion.p
             variants={variants}
-            className={`${fontBody} max-w-xl text-base leading-relaxed text-white/90 sm:text-lg`}
+            className={`${fontBody} max-w-xl text-base leading-relaxed text-white/90 sm:text-lg lg:text-[0.98rem] lg:leading-snug xl:text-lg xl:leading-relaxed`}
           >
             Professional roofing and construction services delivering quality,
             durability, and peace of mind for your home and business.
@@ -109,7 +109,7 @@ export function Hero() {
 
           <motion.div
             variants={variants}
-            className={`${heroGlassSurface} flex w-full flex-col overflow-hidden p-0 max-lg:w-full lg:inline-flex lg:w-auto lg:self-start lg:flex-row`}
+            className={`hero-laptop-cta ${heroGlassSurface} flex w-full flex-col overflow-hidden p-0 max-lg:w-full lg:inline-flex lg:w-auto lg:self-start lg:flex-row xl:mt-0`}
           >
             <ConsultationButton
               variant="hero-glass"
@@ -121,7 +121,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center pb-6 sm:pb-8">
+      <div className="hero-scroll-hint pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center pb-6 sm:pb-8">
         <div className="pointer-events-auto">
           <HeroScrollHint />
         </div>

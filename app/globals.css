@@ -259,3 +259,51 @@
     border-radius: 3rem 3rem 0 0;
   }
 }
+
+/* 14" laptops — keep hero CTAs fully visible above the See More hint */
+@media (min-width: 1024px) and (max-width: 1535px) {
+  #home .hero-laptop-shell {
+    box-sizing: border-box;
+    justify-content: flex-start;
+    padding-top: 6.75rem;
+    padding-bottom: 5.75rem;
+  }
+
+  #home .hero-laptop-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    justify-content: center;
+  }
+
+  #home .hero-laptop-stack {
+    gap: 0.85rem;
+  }
+
+  #home .hero-laptop-headline {
+    font-size: clamp(2.65rem, 4.1vw, 3.45rem);
+    line-height: 0.92;
+  }
+
+  #home .hero-laptop-cta {
+    margin-top: 0.15rem;
+  }
+
+  #home .hero-scroll-hint {
+    padding-bottom: 1.35rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1535px) and (max-height: 820px) {
+  #home .hero-laptop-shell {
+    padding-top: 6.25rem;
+    padding-bottom: 5.25rem;
+  }
+
+  #home .hero-laptop-stack {
+    gap: 0.65rem;
+  }
+
+  #home .hero-laptop-headline {
+    font-size: clamp(2.35rem, 3.8vw, 3rem);
+  }
+}
